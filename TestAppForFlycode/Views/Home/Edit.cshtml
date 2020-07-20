@@ -1,0 +1,33 @@
+﻿@model TestAppForFlycode.Models.Post
+@{
+    ViewData["Title"] = "Редакция ";
+    // Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Редакция постов</title>
+</head>
+<body>
+    <form asp-action="Edit" asp-controller="home">
+
+        <div class="form-group">
+
+            <label asp-for="Heading" class="control-label">Загаловок</label>
+            <input type="text" asp-for="Heading" class="form-control" />
+            <label asp-for="Description" class="control-label">Описание</label>
+            <input type="text" asp-for="Description" class="form-control" />
+            <label asp-for="DateOfCreation" class="control-label">Дата созданияк</label>
+            <input type="text" asp-for="DateOfCreation" class="form-control" />
+
+        </div>
+        <hr />
+        <div class="form-group">
+
+            <input type="submit" value="Создать" class="btn btn-default" />
+
+        </div>
+    </form>
+</body>
+</html>

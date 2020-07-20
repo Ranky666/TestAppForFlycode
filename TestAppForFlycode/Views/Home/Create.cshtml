@@ -1,0 +1,36 @@
+﻿@model TestAppForFlycode.Models.Post
+@{
+    ViewData["Title"] = "Список ";
+    // Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Ежедневник</title>
+</head>
+<body>
+    <form asp-action="create" asp-controller="home">
+        <div class="form-group">
+
+
+
+        </div>
+        <div class="form-group">
+
+            <label asp-for="Heading" class="control-label">Загаловок</label>
+            <input type="text" asp-for="Heading" class="form-control" />
+            <label asp-for="Description" class="control-label">Описание</label>
+            <input type="text" asp-for="Description" class="form-control" />
+            <label asp-for="DateOfCreation" class="control-label">Дата созданияк</label>
+            <input type="text" asp-for="DateOfCreation" class="form-control" />
+
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Создать" class="btn btn-default" />
+
+        </div>
+    </form>
+</body>
+</html>
