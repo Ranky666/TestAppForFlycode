@@ -21,9 +21,22 @@ namespace TestAppForFlycode.Controllers
         {
             db = context;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchTag)
         {
-            return View(await db.Posts.ToListAsync());
+
+            var movies = from m in db.Posts
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchTag))
+            {
+                movies = movies.Where(s => s.Heading.Contains(searchTag));
+            }
+
+
+            return View(await movies.ToListAsync());
+
+
+            //return View(await db.Posts.ToListAsync());
         }
 
 
