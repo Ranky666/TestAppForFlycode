@@ -7,29 +7,32 @@
 
 <html>
 <head>
-    <title>Ежедневник</title>
+  
 </head>
 <body>
-    <form asp-action="create" asp-controller="home">
-        <div class="form-group">
+    <form asp-action="create" enctype="multipart/form-data" asp-controller="home">
+        <div asp-validatoin-summary="ModelOnly" class="text-danger">
+
+            <div class="form-group">
+
+                <label asp-for="Heading" class="control-label">Загаловок</label>
+                <input type="text" asp-for="Heading" class="form-control" />
+                <label asp-for="Description" class="control-label">Описание</label>
+                <input type="text" asp-for="Description" class="form-control" />
+                <label asp-for="DateOfCreation" class="control-label">Дата созданияк</label>
+                <input type="text" asp-for="DateOfCreation" class="form-control" />
 
 
+                <div class="form-group">
+                    <label asp-for="ImageFile" class="control-label">Картинка</label>
+                    <input type="file" asp-for="ImageFile" accept="image" />
 
-        </div>
-        <div class="form-group">
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-default" />
 
-            <label asp-for="Heading" class="control-label">Загаловок</label>
-            <input type="text" asp-for="Heading" class="form-control" />
-            <label asp-for="Description" class="control-label">Описание</label>
-            <input type="text" asp-for="Description" class="form-control" />
-            <label asp-for="DateOfCreation" class="control-label">Дата созданияк</label>
-            <input type="text" asp-for="DateOfCreation" class="form-control" />
-
-        </div>
-
-        <div class="form-group">
-            <input type="submit" value="Создать" class="btn btn-default" />
-
+            </div>
         </div>
     </form>
 </body>

@@ -13,21 +13,17 @@
 
     <p></p>
     <a href="~/Home/Create" class=btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+   
     <p></p>
 
     <form asp-controller="Home" asp-action="Index">
     </form>
     <form class="col s6">
         <div class="row">
-            <div class="input-field col s6">
-                <input type="text" name="SearchTag" type="submit" class="waves-effect waves-light btn-small" />  <i class="material-icons">search</i>
 
-                <label for="Search">Искать</label>
-
-
-            </div>
         </div>
     </form>
+
 
     <h3>Посты</h3>
     <table>
@@ -36,7 +32,7 @@
             <td>Описание</td>
             <td>Дата создания</td>
             <td>Картинка</td>
-            <td></td>
+
         </tr>
         @foreach (var post in Model)
         {
@@ -45,12 +41,15 @@
                 <td>@post.Heading</td>
                 <td>@post.Description</td>
                 <td>@post.DateOfCreation</td>
-
+                <td>@post.ImageFile <img src="@("~/image/" + post.ImageTitle)" asp-append-version="true" width="150" height="150" /> </td>
             </tr>
             <td><a asp-action="Edit" asp-controller="Home" asp-route-id="@post.Id"><i class="material-icons">create</i></a></td>
             <td><a asp-action="Delete" asp-controller="Home" asp-route-id="@post.Id"><i class="material-icons">delete</i></a></td>
+            
+
 
         }
+
     </table>
 </body>
 </html>

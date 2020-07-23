@@ -8,35 +8,40 @@ using Microsoft.Extensions.Logging;
 using TestAppForFlycode.Models;
 using Microsoft.EntityFrameworkCore;
 
-using AutoMapper;
+using System.IO;
+using Microsoft.AspNetCore.Hosting;
 
 namespace TestAppForFlycode.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-       
+
         PostContext db;
-        public HomeController(PostContext context)
+        //private IWebHostEnvironment hostEnvironment;
+
+        public HomeController(PostContext context, IWebHostEnvironment hostEnvironment)
         {
             db = context;
+            this._hostEnvironment = hostEnvironment;
         }
-        public async Task<IActionResult> Index(string searchTag)
+        public async Task<IActionResult> Index()
         {
 
-            var movies = from m in db.Posts
-                         select m;
+           
+            return View(await db.Posts.ToListAsync());
+        }
 
-            if (!String.IsNullOrEmpty(searchTag))
-            {
-                movies = movies.Where(s => s.Heading.Contains(searchTag));
-            }
+        public async Task<IActionResult> GetTag(string tags)
+        {
+            var query =
+                        from post in db.Posts
+                        where tags.All(requiredId => post.Tags.Any(tag => tag.TagsId == requiredId))
+                        select post;
 
 
-            return View(await movies.ToListAsync());
-
-
-            //return View(await db.Posts.ToListAsync());
+            return View(await db.Posts.ToListAsync());
         }
 
 
@@ -45,13 +50,33 @@ namespace TestAppForFlycode.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create(Post post)
+        public async Task<IActionResult> Create([Bind("Id, Heading, Description, DateOfCreation, ImageTitle, ImageFile")] Post post)
         {
-            db.Posts.Add(post);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                // сохрание изображения в wwwroot
+
+                string wwwRootRath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(post.ImageFile.FileName);
+                string extension = Path.GetExtension(post.ImageFile.FileName);
+                post.ImageTitle = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwRootRath + "/image", fileName);
+
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await post.ImageFile.CopyToAsync(fileStream);
+                }
+
+                db.Posts.Add(post);
+
+                await db.SaveChangesAsync();
+                return RedirectToAction(nameof (Index));
+            }
+
+            return View(post);
         }
 
+       
 
         public async Task<IActionResult> Edit(int? id)
         {
@@ -73,7 +98,7 @@ namespace TestAppForFlycode.Controllers
 
         [HttpGet]
         [ActionName("Delete")]
-        public async Task<IActionResult> ConfirmDelete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id != null)
             {
@@ -87,6 +112,32 @@ namespace TestAppForFlycode.Controllers
             return NotFound();
         }
 
+        //public IActionResult UploadImage()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public IActionResult UploadImage(Post post)
+        //{
+        //    foreach (var file in Request.Form.Files)
+        //    {
+        //        Post img = new Post();
+        //        img.ImageTitle = file.FileName;
+
+        //        MemoryStream ms = new MemoryStream();
+        //        file.CopyTo(ms);
+        //        img.ImageData = ms.ToArray();
+
+        //        ms.Close();
+        //        ms.Dispose();
+
+        //        db.Posts.Add(post);
+        //        db.SaveChanges();
+        //    }
+
+        //    return View("Index");
+        //}
 
     }
 }

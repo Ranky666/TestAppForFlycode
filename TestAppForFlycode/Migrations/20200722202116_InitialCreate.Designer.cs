@@ -9,7 +9,7 @@ using TestAppForFlycode.Models;
 namespace TestAppForFlycode.Migrations
 {
     [DbContext(typeof(PostContext))]
-    [Migration("20200720123757_InitialCreate")]
+    [Migration("20200722202116_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

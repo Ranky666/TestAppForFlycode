@@ -16,17 +16,24 @@ namespace TestAppForFlycode.Models
                     {
                         Heading = "Новости",
                         Description = "Россия победила COVID",
-                        DateOfCreation = 2020
+                        DateOfCreation = 2020,
+                        ImageTitle ="изображение"
                     }
-
-                   
+                                       
                 );
-               
+
+                context.Tags.AddRange(
+                   new Tag
+                   {
+                     TagName = "Новости"
+                     
+                   }
+
+               );
+
                 context.SaveChanges();
             }
-
-
-        
+                    
         }
     }
 }
