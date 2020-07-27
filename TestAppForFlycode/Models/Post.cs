@@ -12,7 +12,7 @@ namespace TestAppForFlycode.Models
     public  class Post
     {
        
-        public int Id { get; set; }
+        public int PostId { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         public string Heading { get; set; } // заголовок
         [Column(TypeName = "nvarchar(100)")]
@@ -26,15 +26,8 @@ namespace TestAppForFlycode.Models
         [NotMapped]
         [DisplayName("Upload File")]
         public  IFormFile ImageFile { get; set; }
-   
 
-        public  Post()
-        {
-            Tags = new HashSet<PostTag>();
-        }
+        public List<PostTag> PostTags { get; set; }
 
-        public virtual ICollection<PostTag> Tags { get; set; }
-
-      
     }
 }

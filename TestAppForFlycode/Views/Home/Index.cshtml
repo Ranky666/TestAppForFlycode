@@ -65,8 +65,8 @@
                 <td>@post.DateOfCreation</td>
                 <td>@post.ImageFile <img src="@("~/image/" + post.ImageTitle)" asp-append-version="true" width="150" height="150" /> </td>
 
-                <td><a asp-action="Edit" asp-controller="Home" asp-route-id="@post.Id"><i class="material-icons">create</i></a></td>
-                <td><a asp-action="Delete" asp-controller="Home" asp-route-id="@post.Id"><i class="material-icons">delete</i></a></td>
+                <td><a asp-action="Edit" asp-controller="Home" asp-route-id="@post.PostId"><i class="material-icons">create</i></a></td>
+                <td><a asp-action="Delete" asp-controller="Home" asp-route-id="@post.PostId"><i class="material-icons">delete</i></a></td>
 
             </tr>
 

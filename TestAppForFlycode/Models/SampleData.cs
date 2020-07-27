@@ -9,34 +9,23 @@ namespace TestAppForFlycode.Models
     {
         public static void Initialize(PostContext context)
         {
-            if (!context.Posts.Any())
+            if (!context.Tags.Any())
             {
-                context.Posts.AddRange(
-                    new Post
-                    {
-                        Heading = "Новости",
-                        Description = "Россия победила COVID",
-                        DateOfCreation = 20022020,
-                        ImageTitle ="изображение"
-                    }
-                                       
-                );
-
                 context.Tags.AddRange(
                    new Tag
                    {
-                     TagName = "Новости"
-                     
+                     TagName = "Новости",
+                     TagId = "1"
                    },
                    new Tag
                    {
-                     TagName = "Реклама"
-
+                     TagName = "Реклама",
+                     TagId ="2"
                    },
                    new Tag
                    {
-                     TagName = "Погода"
-
+                     TagName = "Погода",
+                     TagId ="3"
                    }
 
                );

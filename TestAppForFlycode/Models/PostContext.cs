@@ -10,10 +10,7 @@ namespace TestAppForFlycode.Models
     {
 
         public DbSet<Post> Posts { get; set; }
-
         public DbSet<Tag> Tags { get; set; }
-
-        public DbSet<PostTag> PostsTags { get; set; }
 
         public PostContext(DbContextOptions<PostContext> options)
                   : base(options)
@@ -27,42 +24,21 @@ namespace TestAppForFlycode.Models
             optionsBuilder.UseSqlServer("Data Source=./;Initial Catalog=Posts;Trusted_Connection=False;");
         }
 
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Post>(entity =>
-            {
-                entity.HasIndex(e => e.Heading)
-                    .HasName("sqlserver_autoindex_Tags_1")
-                    .IsUnique();
+            modelBuilder.Entity<PostTag>()
+             .HasKey(t => new { t.PostId, t.TagId });
 
-                entity.Property(e => e.Heading).IsRequired();
-            });
+            modelBuilder.Entity<PostTag>()
+                .HasOne(pt => pt.Post)
+                .WithMany(p => p.PostTags)
+                .HasForeignKey(pt => pt.PostId);
 
-            modelBuilder.Entity<Tag>(entity =>
-            {
-                entity.Property(e => e.TagName).IsRequired();
-            });
-
-            modelBuilder.Entity<PostTag>(entity =>
-            {
-                entity.Property(e => e.PostId).IsRequired();
-                entity.Property(e => e.TagsId).IsRequired();
-
-                entity.HasOne(posttag => posttag.post)
-                    .WithMany(post => post.Tags)
-                    .HasForeignKey(postag => postag.PostId);
-
-                entity.HasOne(posttag => posttag.tag)
-                    .WithMany(tag => tag.Posts)
-                    .HasForeignKey(posttag => posttag.TagsId);
-            });
+            modelBuilder.Entity<PostTag>()
+                .HasOne(pt => pt.Tag)
+                .WithMany(t => t.PostTags)
+                .HasForeignKey(pt => pt.TagId);
         }
-
-
-
-
 
     }
 }

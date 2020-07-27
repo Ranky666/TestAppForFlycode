@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestAppForFlycode.Models;
 
 namespace TestAppForFlycode.Migrations
 {
     [DbContext(typeof(PostContext))]
-    partial class PostContextModelSnapshot : ModelSnapshot
+    [Migration("20200727161123_FixStructureOfDatabase")]
+    partial class FixStructureOfDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -20,7 +22,7 @@ namespace TestAppForFlycode.Migrations
 
             modelBuilder.Entity("TestAppForFlycode.Models.Post", b =>
                 {
-                    b.Property<int>("PostId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -33,55 +35,70 @@ namespace TestAppForFlycode.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Heading")
+                        .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ImageTitle")
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("PostId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("Heading")
+                        .IsUnique()
+                        .HasName("sqlserver_autoindex_Tags_1");
 
                     b.ToTable("Posts");
                 });
 
             modelBuilder.Entity("TestAppForFlycode.Models.PostTag", b =>
                 {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<int>("PostId")
                         .HasColumnType("int");
 
-                    b.Property<string>("TagId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("TagsId")
+                        .HasColumnType("int");
 
-                    b.HasKey("PostId", "TagId");
+                    b.HasKey("Id");
 
-                    b.HasIndex("TagId");
+                    b.HasIndex("PostId");
 
-                    b.ToTable("PostTag");
+                    b.HasIndex("TagsId");
+
+                    b.ToTable("PostsTags");
                 });
 
             modelBuilder.Entity("TestAppForFlycode.Models.Tag", b =>
                 {
-                    b.Property<string>("TagId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("TagName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("TagId");
+                    b.HasKey("Id");
 
                     b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("TestAppForFlycode.Models.PostTag", b =>
                 {
-                    b.HasOne("TestAppForFlycode.Models.Post", "Post")
-                        .WithMany("PostTags")
+                    b.HasOne("TestAppForFlycode.Models.Post", "post")
+                        .WithMany("Tags")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TestAppForFlycode.Models.Tag", "Tag")
-                        .WithMany("PostTags")
-                        .HasForeignKey("TagId")
+                    b.HasOne("TestAppForFlycode.Models.Tag", "tag")
+                        .WithMany("Posts")
+                        .HasForeignKey("TagsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

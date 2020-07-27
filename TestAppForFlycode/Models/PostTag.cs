@@ -8,12 +8,11 @@ namespace TestAppForFlycode.Models
     public class PostTag
     {
 
-        public int Id { get; set; }
         public int PostId { get; set; }
-        public int TagsId { get; set; }
+        public string TagId { get; set; }
 
-        public  Post post { get; set; }
-        public  Tag tag { get; set; }
+        public  Post Post { get; set; }
+        public  Tag Tag { get; set; }
 
 
     }

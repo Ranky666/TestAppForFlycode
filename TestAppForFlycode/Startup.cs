@@ -29,12 +29,6 @@ namespace TestAppForFlycode
             string connection = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<PostContext>(options => options.UseSqlServer(connection));
             services.AddControllersWithViews();
-
-
-           
-
-           
-
         }
 
         public void Configure(IApplicationBuilder app)

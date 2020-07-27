@@ -36,56 +36,51 @@ namespace TestAppForFlycode.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id, Heading, Description, DateOfCreation, ImageTitle, ImageFile")] Post posts, PostDTO dto)
+        public async Task<IActionResult> Create([Bind("Id, Heading, Description, DateOfCreation, ImageTitle, ImageFile")] Post post)
         {
             if (ModelState.IsValid)
             {
                 // сохрание изображения в wwwroot
 
                 string wwwRootRath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(posts.ImageFile.FileName);
-                string extension = Path.GetExtension(posts.ImageFile.FileName);
-                posts.ImageTitle = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string fileName = Path.GetFileNameWithoutExtension(post.ImageFile.FileName);
+                string extension = Path.GetExtension(post.ImageFile.FileName);
+                post.ImageTitle = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                 string path = Path.Combine(wwwRootRath + "/image", fileName);
 
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    await posts.ImageFile.CopyToAsync(fileStream);
+                    await post.ImageFile.CopyToAsync(fileStream);
                 }
 
-                var post = new Post
+                var postDb = new Post
                 {
-                    DateOfCreation = dto.DateOfCreation,
-                    Description = dto.Description,
-                    Heading = dto.Heading,
-                    ImageFile = dto.ImageFile,
-                    ImageTitle = dto.ImageTitle,
-
-
+                    DateOfCreation = post.DateOfCreation,
+                    Description = post.Description,
+                    Heading = post.Heading,
+                    ImageFile = post.ImageFile,
+                    ImageTitle = post.ImageTitle,
                 };
 
-                db.Posts.AddRange(post);
+                db.Posts.AddRange(postDb);
                 db.SaveChanges();
 
-                var postTags = dto.TagsIds.Select(item => new PostTag
-                {
-                    PostId = post.Id,
-                    TagsId = item,
+                //var postTags = post.TagsIds.Select(item => new PostTag
+                //{
+                //    PostId = post.Id,
+                //    TagsId = item,
 
-                });
+                //});
 
 
-                db.PostsTags.AddRange(postTags);
+                //db.PostsTags.AddRange(postTags);
                 db.SaveChanges();
-
-                db.Posts.Add(posts);
-                await db.SaveChangesAsync();
 
                 return RedirectToAction(nameof (Index));
             }
             
 
-            return View(posts);
+            return View(/*posts*/);
         }
 
        
@@ -93,7 +88,7 @@ namespace TestAppForFlycode.Controllers
         {
             if (id != null)
             {
-                Post post = await db.Posts.FirstOrDefaultAsync(p => p.Id == id);
+                Post post = await db.Posts.FirstOrDefaultAsync(p => p.PostId == id);
                 if (post != null)
                     return View(post);
             }
@@ -113,7 +108,7 @@ namespace TestAppForFlycode.Controllers
         {
             if (id != null)
             {
-                Post post = await db.Posts.FirstOrDefaultAsync(p => p.Id == id);
+                Post post = await db.Posts.FirstOrDefaultAsync(p => p.PostId == id);
                 if (post != null)
                     db.Posts.Remove(post);
                 await db.SaveChangesAsync();
@@ -126,35 +121,35 @@ namespace TestAppForFlycode.Controllers
         // для тегов
 
       
-        [HttpPost]
+        //[HttpPost]
 
-        public int SavePost([FromBody] PostDTO dto)
-        {
+        //public int SavePost([FromBody] PostDTO dto)
+        //{
            
-            var post = new Post
-            {
-                DateOfCreation = dto.DateOfCreation, 
-                Description = dto.Description,
-                Heading = dto.Heading,
-                ImageFile = dto.ImageFile,
-                ImageTitle = dto.ImageTitle,
+        //    var post = new Post
+        //    {
+        //        DateOfCreation = dto.DateOfCreation, 
+        //        Description = dto.Description,
+        //        Heading = dto.Heading,
+        //        ImageFile = dto.ImageFile,
+        //        ImageTitle = dto.ImageTitle,
 
-            };
-            db.Posts.AddRange(post);
-            db.SaveChanges();
+        //    };
+        //    db.Posts.AddRange(post);
+        //    db.SaveChanges();
 
-            var postTags = dto.TagsIds.Select(item => new PostTag
-            {
-                PostId = post.Id,
-                TagsId = item,
+        //    var postTags = dto.TagsIds.Select(item => new PostTag
+        //    {
+        //        PostId = post.PostId,
+        //        TagId = item,
                                 
-            });
+        //    });
                         
-            db.PostsTags.AddRange(postTags);
-            db.SaveChanges();
+        //    db.PostTags.AddRange(postTags);
+        //    db.SaveChanges();
 
-            return  post.Id;
-        }
+        //    return  post.Id;
+        //}
        
     }
 }
