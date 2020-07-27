@@ -13,7 +13,7 @@
 
     <p></p>
     <a href="~/Home/Create" class=btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-   
+  
     <p></p>
 
     <form asp-controller="Home" asp-action="Index">
@@ -25,13 +25,35 @@
     </form>
 
 
-    <h3>Посты</h3>
+    <div class="chips chips-autocomplete">
+
+        <div class="chip">
+
+            Новости
+            <i class="close material-icons">close</i>
+        </div>
+        <div class="chip">
+
+            Погода
+            <i class="close material-icons">close</i>
+        </div>
+        <div class="chip">
+
+            Реклама
+            <i class="close material-icons">close</i>
+        </div>
+
+
+    </div>
+
+
+    <h5>Стена</h5>
     <table>
-        <tr>
+        <tr class="responsive-table">
             <td>Загаловок</td>
             <td>Описание</td>
             <td>Дата создания</td>
-            <td>Картинка</td>
+            <td>Изображение</td>
 
         </tr>
         @foreach (var post in Model)
@@ -42,10 +64,11 @@
                 <td>@post.Description</td>
                 <td>@post.DateOfCreation</td>
                 <td>@post.ImageFile <img src="@("~/image/" + post.ImageTitle)" asp-append-version="true" width="150" height="150" /> </td>
+
+                <td><a asp-action="Edit" asp-controller="Home" asp-route-id="@post.Id"><i class="material-icons">create</i></a></td>
+                <td><a asp-action="Delete" asp-controller="Home" asp-route-id="@post.Id"><i class="material-icons">delete</i></a></td>
+
             </tr>
-            <td><a asp-action="Edit" asp-controller="Home" asp-route-id="@post.Id"><i class="material-icons">create</i></a></td>
-            <td><a asp-action="Delete" asp-controller="Home" asp-route-id="@post.Id"><i class="material-icons">delete</i></a></td>
-            
 
 
         }

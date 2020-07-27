@@ -1,4 +1,4 @@
-﻿@model TestAppForFlycode.Models.Post
+﻿@model TestAppForFlycode.Common.PostDTO
 @{
     ViewData["Title"] = "Список ";
     // Layout = null;
@@ -21,6 +21,10 @@
                 <input type="text" asp-for="Description" class="form-control" />
                 <label asp-for="DateOfCreation" class="control-label">Дата созданияк</label>
                 <input type="text" asp-for="DateOfCreation" class="form-control" />
+                <label asp-for="TagsIds" class="control-label">Тег</label>
+                <input type="text" asp-for="TagsIds" class="form-control" />
+               
+
 
 
                 <div class="form-group">
@@ -35,5 +39,6 @@
             </div>
         </div>
     </form>
+  
 </body>
 </html>

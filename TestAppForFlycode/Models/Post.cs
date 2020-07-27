@@ -11,10 +11,10 @@ namespace TestAppForFlycode.Models
 {
     public  class Post
     {
-        [Key]
+       
         public int Id { get; set; }
         [Column(TypeName = "nvarchar(50)")]
-        public string Heading { get; set; } // загаловок
+        public string Heading { get; set; } // заголовок
         [Column(TypeName = "nvarchar(100)")]
         public string Description { get; set; } // Описание
         [Column(TypeName = "varchar(100)")]
@@ -35,6 +35,6 @@ namespace TestAppForFlycode.Models
 
         public virtual ICollection<PostTag> Tags { get; set; }
 
-
+      
     }
 }

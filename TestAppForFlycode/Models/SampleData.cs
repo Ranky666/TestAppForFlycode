@@ -16,7 +16,7 @@ namespace TestAppForFlycode.Models
                     {
                         Heading = "Новости",
                         Description = "Россия победила COVID",
-                        DateOfCreation = 2020,
+                        DateOfCreation = 20022020,
                         ImageTitle ="изображение"
                     }
                                        
@@ -27,6 +27,16 @@ namespace TestAppForFlycode.Models
                    {
                      TagName = "Новости"
                      
+                   },
+                   new Tag
+                   {
+                     TagName = "Реклама"
+
+                   },
+                   new Tag
+                   {
+                     TagName = "Погода"
+
                    }
 
                );
