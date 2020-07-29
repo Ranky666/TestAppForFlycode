@@ -144,9 +144,9 @@ namespace TestAppForFlycode.Controllers
             {
                 Tag tag = await db.Tags.FirstOrDefaultAsync(p => p.TagId == Tagid);
                 if (tag != null)
-                    return View(tag);
+                return View(tag);
             }
-                return NotFound();
+            return NotFound();
         }
     }
 }

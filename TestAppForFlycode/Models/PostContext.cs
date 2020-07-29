@@ -20,8 +20,7 @@ namespace TestAppForFlycode.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=relationsdb;Trusted_Connection=True;");
-            optionsBuilder.UseSqlServer("Data Source=./;Initial Catalog=Posts;Trusted_Connection=False;");
+           optionsBuilder.UseSqlServer("Data Source=./;Initial Catalog=Posts;Trusted_Connection=False;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

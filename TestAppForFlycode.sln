@@ -7,10 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAppForFlycode", "TestAp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestAppForFlycode.Common", "TestAppForFlycode.Common\TestAppForFlycode.Common.csproj", "{7F9333E1-6533-467D-86D6-F7492BC8FE42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppForFlycode.DAL", "TestAppForFlycode.DAL\TestAppForFlycode.DAL.csproj", "{FE79DBEF-FD3E-420C-A93B-CCEDE261B33D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestAppForFlycode.BL", "TestAppForFlycode.BL\TestAppForFlycode.BL.csproj", "{A68D0EA1-CFEA-48A7-8EA8-C39C468C80BD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,14 +21,6 @@ Global
 		{7F9333E1-6533-467D-86D6-F7492BC8FE42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F9333E1-6533-467D-86D6-F7492BC8FE42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F9333E1-6533-467D-86D6-F7492BC8FE42}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE79DBEF-FD3E-420C-A93B-CCEDE261B33D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE79DBEF-FD3E-420C-A93B-CCEDE261B33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE79DBEF-FD3E-420C-A93B-CCEDE261B33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE79DBEF-FD3E-420C-A93B-CCEDE261B33D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A68D0EA1-CFEA-48A7-8EA8-C39C468C80BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A68D0EA1-CFEA-48A7-8EA8-C39C468C80BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A68D0EA1-CFEA-48A7-8EA8-C39C468C80BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A68D0EA1-CFEA-48A7-8EA8-C39C468C80BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

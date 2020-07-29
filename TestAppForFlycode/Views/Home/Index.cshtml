@@ -13,8 +13,8 @@
 <body>
 
     <p></p>
-    <a href="~/Home/Create" class=btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-    <a href="~/Home/CreateTag" class=btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add_to_queue</i></a>
+    <a href="~/Home/Create" class="waves-effect waves-light btn">Добавить пост </a>
+    <a href="~/Home/CreateTag"  class="waves-effect waves-light btn">Добавить тег </a>
     <p></p>
 
     <form asp-controller="Home" asp-action="Index">
@@ -24,29 +24,6 @@
 
         </div>
     </form>
-
-
-    <div class="chips chips-autocomplete">
-
-
-        <div class="chip">
-
-            Новости
-            <i class="close material-icons">close</i>
-        </div>
-        <div class="chip">
-
-            Погода
-            <i class="close material-icons">close</i>
-        </div>
-        <div class="chip">
-
-            Реклама
-            <i class="close material-icons">close</i>
-        </div>
-
-    </div>
-
 
     <h5>Стена</h5>
     <table>
@@ -70,7 +47,6 @@
                 <td><a asp-action="Delete" asp-controller="Home" asp-route-id="@post.PostId"><i class="material-icons">delete</i></a></td>
 
             </tr>
-
 
         }
 
