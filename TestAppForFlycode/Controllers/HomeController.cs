@@ -16,9 +16,7 @@ namespace TestAppForFlycode.Controllers
     {
         private readonly IWebHostEnvironment _hostEnvironment;
 
-
         PostContext db;
-       
         public HomeController(PostContext context, IWebHostEnvironment hostEnvironment)
         {
             db = context;
@@ -27,11 +25,9 @@ namespace TestAppForFlycode.Controllers
         public async Task<IActionResult> Index()
         {
 
-           
             return View(await db.Posts.ToListAsync());
         }
 
-     
         public IActionResult Create()
         {
             return View();
@@ -63,7 +59,6 @@ namespace TestAppForFlycode.Controllers
                     ImageFile = post.ImageFile,
                     ImageTitle = post.ImageTitle,
                 };
-
 
                 db.Posts.Add(postDb);
                 db.SaveChanges();
@@ -101,7 +96,7 @@ namespace TestAppForFlycode.Controllers
             {
                 Post post = await db.Posts.FirstOrDefaultAsync(p => p.PostId == id);
                 if (post != null)
-                    return View(post);
+                return View(post);
             }
             return NotFound();
         }
@@ -137,9 +132,8 @@ namespace TestAppForFlycode.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTag(Tag tag)
         {
-            //tag.TagId = Guid.NewGuid().ToString();
+          
             db.Tags.Add(tag);
-            
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -154,8 +148,5 @@ namespace TestAppForFlycode.Controllers
             }
                 return NotFound();
         }
-
-
-
     }
 }
