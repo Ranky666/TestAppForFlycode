@@ -15,17 +15,17 @@ namespace TestAppForFlycode.Models
                    new Tag
                    {
                      TagName = "Новости",
-                     TagId = "1"
+                     TagId = 1
                    },
                    new Tag
                    {
                      TagName = "Реклама",
-                     TagId ="2"
+                     TagId = 2
                    },
                    new Tag
                    {
                      TagName = "Погода",
-                     TagId ="3"
+                     TagId = 3
                    }
 
                );

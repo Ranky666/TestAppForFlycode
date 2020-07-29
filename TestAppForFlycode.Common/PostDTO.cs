@@ -26,7 +26,7 @@ namespace TestAppForFlycode.Common
         //[DisplayName("Upload File")]
         public IFormFile ImageFile { get; set; }
 
-        public List<int> TagsIds { get; set; }
-       
+        public List<int> TagId { get; set; }
+
     }
 }

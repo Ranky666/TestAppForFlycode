@@ -1,7 +1,8 @@
 ﻿@model IEnumerable<TestAppForFlycode.Models.Post>
+
 @{
     ViewData["Title"] = "Список ";
-   // Layout = null;
+    // Layout = null;
 }
 <!DOCTYPE html>
 
@@ -13,7 +14,7 @@
 
     <p></p>
     <a href="~/Home/Create" class=btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
-  
+    <a href="~/Home/CreateTag" class=btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add_to_queue</i></a>
     <p></p>
 
     <form asp-controller="Home" asp-action="Index">
@@ -26,6 +27,7 @@
 
 
     <div class="chips chips-autocomplete">
+
 
         <div class="chip">
 
@@ -42,7 +44,6 @@
             Реклама
             <i class="close material-icons">close</i>
         </div>
-
 
     </div>
 

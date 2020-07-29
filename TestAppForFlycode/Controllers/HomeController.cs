@@ -8,6 +8,7 @@ using System.IO;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using TestAppForFlycode.Common;
+using System.Collections.Generic;
 
 namespace TestAppForFlycode.Controllers
 {
@@ -55,6 +56,7 @@ namespace TestAppForFlycode.Controllers
 
                 var postDb = new Post
                 {
+                   
                     DateOfCreation = post.DateOfCreation,
                     Description = post.Description,
                     Heading = post.Heading,
@@ -62,28 +64,37 @@ namespace TestAppForFlycode.Controllers
                     ImageTitle = post.ImageTitle,
                 };
 
-                db.Posts.AddRange(postDb);
+
+                db.Posts.Add(postDb);
                 db.SaveChanges();
 
-                //var postTags = post.TagsIds.Select(item => new PostTag
-                //{
-                //    PostId = post.Id,
-                //    TagsId = item,
+                var tag = new Tag()
+                {
+                    TagName = post.PostTags.Select(item => new PostTag
+                    {
+                        TagId = item.TagId
+                    }).FirstOrDefault().Tag.TagName
+                };
 
-                //});
+                db.Tags.Add(tag);
+                db.SaveChanges();
 
+                var postTags = post.PostTags.Select(item => new PostTag
+                {
 
-                //db.PostsTags.AddRange(postTags);
+                    PostId = post.PostId,
+                    TagId = item.TagId
+
+                });
+                                
+                db.PostTag.AddRange(postTags);
                 db.SaveChanges();
 
                 return RedirectToAction(nameof (Index));
             }
-            
-
-            return View(/*posts*/);
+            return View(post.PostId);
         }
-
-       
+              
         public async Task<IActionResult> Edit(int? id)
         {
             if (id != null)
@@ -119,37 +130,32 @@ namespace TestAppForFlycode.Controllers
         }
 
         // для тегов
+        public IActionResult CreateTag()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateTag(Tag tag)
+        {
+            //tag.TagId = Guid.NewGuid().ToString();
+            db.Tags.Add(tag);
+            
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
-      
-        //[HttpPost]
+        public async Task<IActionResult> EditTag(int? Tagid)
+        {
+            if (Tagid != null)
+            {
+                Tag tag = await db.Tags.FirstOrDefaultAsync(p => p.TagId == Tagid);
+                if (tag != null)
+                    return View(tag);
+            }
+                return NotFound();
+        }
 
-        //public int SavePost([FromBody] PostDTO dto)
-        //{
-           
-        //    var post = new Post
-        //    {
-        //        DateOfCreation = dto.DateOfCreation, 
-        //        Description = dto.Description,
-        //        Heading = dto.Heading,
-        //        ImageFile = dto.ImageFile,
-        //        ImageTitle = dto.ImageTitle,
 
-        //    };
-        //    db.Posts.AddRange(post);
-        //    db.SaveChanges();
 
-        //    var postTags = dto.TagsIds.Select(item => new PostTag
-        //    {
-        //        PostId = post.PostId,
-        //        TagId = item,
-                                
-        //    });
-                        
-        //    db.PostTags.AddRange(postTags);
-        //    db.SaveChanges();
-
-        //    return  post.Id;
-        //}
-       
     }
 }

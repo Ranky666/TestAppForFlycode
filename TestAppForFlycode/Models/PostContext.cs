@@ -11,6 +11,7 @@ namespace TestAppForFlycode.Models
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tag> Tags { get; set; }
+        public DbSet<PostTag> PostTag { get; set; }
 
         public PostContext(DbContextOptions<PostContext> options)
                   : base(options)

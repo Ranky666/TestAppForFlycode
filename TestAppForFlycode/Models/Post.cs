@@ -11,7 +11,8 @@ namespace TestAppForFlycode.Models
 {
     public  class Post
     {
-       
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PostId { get; set; }
         [Column(TypeName = "nvarchar(50)")]
         public string Heading { get; set; } // заголовок

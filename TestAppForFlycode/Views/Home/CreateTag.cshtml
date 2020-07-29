@@ -1,0 +1,33 @@
+﻿@model TestAppForFlycode.Models.Tag
+@{
+    ViewData["Title"] = "Список ";
+    // Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+
+</head>
+<body>
+    <form asp-action="createTag"  asp-controller="home">
+        <div asp-validatoin-summary="ModelOnly" class="text-danger">
+
+            <div class="form-group">
+
+                <label asp-for="TagId" class="control-label">Номер Тега</label>
+                <input type="text" asp-for="TagId" class="form-control" />
+
+                <label asp-for="TagName" class="control-label">Тег</label>
+                <input type="text" asp-for="TagName" class="form-control" />
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Создать" class="btn btn-default" />
+
+            </div>
+        </div>
+    </form>
+
+</body>
+</html>
