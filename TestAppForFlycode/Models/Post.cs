@@ -27,7 +27,6 @@ namespace TestAppForFlycode.Models
         [NotMapped]
         [DisplayName("Upload File")]
         public  IFormFile ImageFile { get; set; }
-
         public List<PostTag> PostTags { get; set; }
 
     }

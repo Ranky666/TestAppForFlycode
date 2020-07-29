@@ -12,20 +12,11 @@ namespace TestAppForFlycode.Common
     {
         
         public int Id { get; set; }
-        //[Column(TypeName = "nvarchar(50)")]
         public string Heading { get; set; } // заголовок
-        //[Column(TypeName = "nvarchar(100)")]
         public string Description { get; set; } // Описание
-        //[Column(TypeName = "varchar(100)")]
         public int DateOfCreation { get; set; } // дата создания
-        //[Column(TypeName = "nvarchar(100)")]
-        //[DisplayName("ImageTitle")]
         public string ImageTitle { get; set; }
-
-        //[NotMapped]
-        //[DisplayName("Upload File")]
         public IFormFile ImageFile { get; set; }
-
         public List<int> TagId { get; set; }
 
     }

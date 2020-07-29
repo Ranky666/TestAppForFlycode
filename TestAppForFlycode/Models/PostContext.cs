@@ -8,7 +8,6 @@ namespace TestAppForFlycode.Models
 {
     public class PostContext : DbContext
     {
-
         public DbSet<Post> Posts { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<PostTag> PostTag { get; set; }

@@ -12,9 +12,7 @@ namespace TestAppForFlycode.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TagId { get; set; }
-
         public string TagName { get; set; }
-
         public  List<PostTag> PostTags { get; set; }
     }
 }
